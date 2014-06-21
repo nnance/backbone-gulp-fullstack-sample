@@ -17,7 +17,9 @@ require.config({
 });
 
 require([
-    'backbone'
-], function (Backbone) {
+    'backbone',
+    'views/app'
+], function (Backbone, AppView) {
+    var app = new AppView();
     Backbone.history.start();
 });
