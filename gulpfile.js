@@ -1,5 +1,5 @@
 'use strict';
-// generated on 2014-06-20 using generator-backbone-fullstack 0.0.0
+// generated on 2014-06-21 using generator-backbone-fullstack 0.0.0
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var rimraf = require('rimraf');
@@ -34,6 +34,12 @@ gulp.task('html', ['styles'], function () {
         .pipe($.useref.restore())
         .pipe($.useref())
         .pipe(gulp.dest('dist'));
+});
+
+gulp.task('jst', function() {
+    gulp.src('app/scripts/templates/**/*.ejs')
+        .pipe($.jst())
+        .pipe(gulp.dest('.tmp'));
 });
 
 gulp.task('images', function () {
@@ -120,7 +126,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
     gulp.watch('bower.json', ['wiredep']);
 });
 
-gulp.task('build', ['jshint', 'html', 'images', 'fonts', 'extras'], function () {
+gulp.task('build', ['jshint', 'html', 'jst', 'images', 'fonts', 'extras'], function () {
     return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
